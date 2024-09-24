@@ -1,3 +1,8 @@
+from faker import Faker
+
+fake = Faker(locale='ru_RU')
+
+
 class BaseEndpoint:
     BASE_URL = 'https://stellarburgers.nomoreparties.site/'
     response = None
@@ -28,3 +33,23 @@ class BaseEndpoint:
     @staticmethod
     def delete_name_from_payload(payload):
         return BaseEndpoint._delete_field_from_payload('name', payload)
+
+    @staticmethod
+    def _regenerate_field_(field, new_value, payload):
+        new_payload = payload.copy()
+        new_payload[field] = new_value
+        return new_payload
+
+    @staticmethod
+    def regenerate_email(payload):
+        return BaseEndpoint._regenerate_field_('email', fake.email(), payload)
+
+    @staticmethod
+    def regenerate_password(payload):
+        return BaseEndpoint._regenerate_field_('password', fake.password(), payload)
+
+    @staticmethod
+    def regenerate_email_and_password(payload):
+        new_payload = BaseEndpoint.regenerate_email(payload)
+        new_payload = BaseEndpoint.regenerate_password(new_payload)
+        return new_payload
