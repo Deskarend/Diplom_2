@@ -2,6 +2,8 @@ import pytest
 from faker import Faker
 
 from endpoints.create_user import CreateUser
+from endpoints.delete_user import DeleteUser
+from endpoints.login_user import LoginUser
 
 # from endpoints.delete_user import DeleteUser
 
@@ -15,11 +17,19 @@ def payload_of_new_courier():
         "password": fake.password(),
         "name": fake.user_name()
     }
-    return payload
 
-    # yield payload
-    # delete_user = DeleteUser()
-    # delete_user.delete_user()
+    yield payload
+
+    payload_for_check_authorization = {
+        "email": payload['email'],
+        "password": payload['password']
+    }
+
+    login_user = LoginUser()
+    login_user.login(payload_for_check_authorization)
+    if login_user.response.status_code == 200:
+        d = DeleteUser()
+        d.delete_user(login_user.response_json['accessToken'])
 
 
 @pytest.fixture()
