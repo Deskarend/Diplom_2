@@ -5,8 +5,6 @@ from endpoints.create_user import CreateUser
 from endpoints.delete_user import DeleteUser
 from endpoints.login_user import LoginUser
 
-# from endpoints.delete_user import DeleteUser
-
 fake = Faker(locale='ru_RU')
 
 
@@ -28,11 +26,10 @@ def payload_of_new_courier():
     login_user = LoginUser()
     login_user.login(payload_for_check_authorization)
     if login_user.response.status_code == 200:
-        d = DeleteUser()
-        d.delete_user(login_user.response_json['accessToken'])
+        DeleteUser().delete_user(login_user.get_access_token())
 
 
-@pytest.fixture()
+@pytest.fixture
 def payload_for_authorization(payload_of_new_courier):
     create_user = CreateUser()
 
@@ -43,3 +40,11 @@ def payload_for_authorization(payload_of_new_courier):
         "password": payload_of_new_courier['password']
     }
     return payload
+
+
+@pytest.fixture
+def token_for_authorization(payload_for_authorization):
+    login_user = LoginUser()
+    login_user.login(payload_for_authorization)
+    yield login_user.get_access_token()
+    DeleteUser().delete_user(login_user.get_access_token())

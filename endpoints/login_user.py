@@ -18,6 +18,11 @@ class LoginUser(BaseEndpoint):
         url = self.BASE_URL + self.LOGIN_USER_ENDPOINT
         self.response = requests.post(url, json=payload)
         self.response_json = self.response.json()
+        self.token = self.response_json.get('accessToken')
+
+    @allure.step('Получение токена доступа')
+    def get_access_token(self):
+        return self.token
 
     @allure.step('Проверка статус кода успешной авторизации пользователя')
     def check_response_status_code_of_successful_login_user(self):

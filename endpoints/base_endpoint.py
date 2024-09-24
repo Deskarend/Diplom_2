@@ -7,6 +7,7 @@ class BaseEndpoint:
     BASE_URL = 'https://stellarburgers.nomoreparties.site/'
     response = None
     response_json = None
+    token = None
 
     def _check_response_status_code(self, status_code):
         assert self.response.status_code == status_code, (f'Ожидаемый код ответа:{status_code}, '
@@ -53,3 +54,7 @@ class BaseEndpoint:
         new_payload = BaseEndpoint.regenerate_email(payload)
         new_payload = BaseEndpoint.regenerate_password(new_payload)
         return new_payload
+
+    @staticmethod
+    def regenerate_name(payload):
+        return BaseEndpoint._regenerate_field_('name', fake.user_name(), payload)

@@ -14,7 +14,7 @@ class CreateUser(BaseEndpoint):
 
     STATUS_CODE_OF_CREATE_USER_WITHOUT_REQUIRED_FIELDS = 403
     RESPONSE_BODY_OF_CREATE_USER_WITHOUT_REQUIRED_FIELDS = {"success": False,
-                                                            "message":  "Email, password and name are required fields"}
+                                                            "message": "Email, password and name are required fields"}
 
     @allure.step('Создание курьера')
     def create_user(self, payload):
