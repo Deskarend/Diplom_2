@@ -50,5 +50,3 @@ class TestCreateOrder:
         create_order.create_order(payload, access_token)
 
         create_order.check_response_of_create_order_with_incorrect_hashes_ingredients()
-
-

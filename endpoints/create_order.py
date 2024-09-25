@@ -17,7 +17,6 @@ class CreateOrder(BaseEndpoint):
 
     STATUS_CODE_OF_CREATE_ORDER_WITH_INCORRECT_HASH_INGREDIENTS = 500
 
-
     @allure.step('Создание заказа')
     def create_order(self, payload, token=None):
         url = self.BASE_URL + self.CREATE_ORDER_ENDPOINT
@@ -37,7 +36,7 @@ class CreateOrder(BaseEndpoint):
         assert self.response_json['name'], (f'Ожидаемое значение поля name - непустое, фактическое -'
                                             f' {self.response_json['name']}')
         assert self.response_json['order']['number'], (f'Ожидаемое значение поля number - непустое, '
-                                                      f'фактическое - {self.response_json['user']['number']}')
+                                                       f'фактическое - {self.response_json['user']['number']}')
         assert self.response_json['success'] is True, (f'Ожидаемое значение поля success - {True}, '
                                                        f'фактическое - {self.response_json['success']}')
 
