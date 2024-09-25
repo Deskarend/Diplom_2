@@ -1,14 +1,38 @@
-# Diplom_2
+## Дипломный проект. Задание 2: API
 
-# Failed tests:
-TestCreateOrder:
+### Автотесты для проверки программы, которая помогает заказать бургер в Stellar Burgers
 
-* test_create_order_without_authorization
+### Реализованные сценарии
 
-Не совпадают код и тело ответа 
+Созданы API-тесты, покрывающие функционал `Создание пользователя`, `Логин пользователя`, `Изменение данных 
+пользователя`, `Создание заказа`,`Получение заказов конкретного пользователя`
 
-ОР: код ответа 401, тело ответа - {"success": False, "message": "You should be authorised"}'
+Процент выполненных тестов 96% (отчет: `allure-report/index.html`)
 
+### Структура проекта
+
+- `endpoints` - пакет, содержащий проект(фреймворк)
+- `tests` - пакет, содержащий тесты, разделенные по классам.
+
+### Запуск автотестов
+
+**Установка зависимостей**
+
+> `$ pip install -r requirements.txt`
+
+**Запуск автотестов и генерирование Allure-отчета**
+
+>  `$ pytest tests --alluredir=allure_results`
+
+**Формирование отчёта в формате веб-страницы**
+
+> `$ allure serve allure_results`
+
+### Failed tests:
+>**TestCreateOrder:**
+>>* test_create_order_without_authorization  
+>**Не совпадают код и тело ответа**  
+ОР: код ответа 401, тело ответа - {"success": False, "message": "You should be authorised"}'  
 ФР: код ответа 200, тело ответа - {"success": true,"name": "...",
     "order": {
         "number": ...

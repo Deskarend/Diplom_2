@@ -24,7 +24,7 @@ class CreateOrder(BaseEndpoint):
             self.response = requests.post(url, payload, headers={"Authorization": token})
         else:
             self.response = requests.post(url, payload)
-        if self.response.status_code == 200:
+        if '5' not in str(self.response.status_code):
             self.response_json = self.response.json()
 
     @allure.step('Проверка статус кода успешного создания заказа')
