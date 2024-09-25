@@ -35,8 +35,10 @@ class CreateUser(BaseEndpoint):
 
         assert self.response_json['user']['name'] == payload['name'], \
             f'Ожидаемое значение поля name - {payload['name']}, фактическое - {self.response_json['user']['name']}'
-        assert 'Bearer ' in self.response_json['accessToken'], f'Ожидаемое значение поля accessToken - Bearer ...'
-        assert self.response_json['refreshToken'], f'Ожидаемое значение поля refreshToken - непустое'
+        assert 'Bearer ' in self.response_json['accessToken'], (f'Ожидаемое значение поля accessToken - Bearer ..., '
+                                                                f'фактическое {self.response_json['accessToken']}')
+        assert self.response_json['refreshToken'], (f'Ожидаемое значение поля refreshToken - непустое,'
+                                                    f'фактическое {self.response_json['refreshToken']}')
 
     @allure.step('Проверка ответа успешного создания пользователя')
     def check_response_of_successful_create_user(self, payload):

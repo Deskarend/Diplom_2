@@ -34,8 +34,10 @@ class LoginUser(BaseEndpoint):
                                                        f'фактическое - {self.response_json['success']}')
         assert self.response_json['user']['email'] == payload['email'], \
             f'Ожидаемое значение поля email - {payload['email']}, фактическое - {self.response_json['user']['email']} '
-        assert 'Bearer ' in self.response_json['accessToken'], f'Ожидаемое значение поля accessToken - Bearer ...'
-        assert self.response_json['refreshToken'], f'Ожидаемое значение поля refreshToken - непустое'
+        assert 'Bearer ' in self.response_json['accessToken'], (f'Ожидаемое значение поля accessToken - Bearer ..., '
+                                                                f'фактическое {self.response_json['accessToken']}')
+        assert self.response_json['refreshToken'], (f'Ожидаемое значение поля refreshToken - непустое,'
+                                                    f'фактическое {self.response_json['refreshToken']}')
 
     @allure.step('Проверка ответа успешной авторизации пользователя')
     def check_response_of_successful_login_user(self, payload):
