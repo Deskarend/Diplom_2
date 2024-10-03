@@ -21,7 +21,7 @@ class CreateOrder(BaseEndpoint):
     def create_order(self, payload, token=None):
         url = self.BASE_URL + self.CREATE_ORDER_ENDPOINT
         if token:
-            self.response = requests.post(url, payload, headers={"Authorization": token})
+            self.response = requests.post(url, json=payload, headers={"Authorization": token})
         else:
             self.response = requests.post(url, payload)
         if '5' not in str(self.response.status_code):

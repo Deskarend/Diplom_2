@@ -8,7 +8,8 @@ from endpoints.create_user import CreateUser
 class TestCreateUser:
     @allure.title("Проверка создания нового пользователя")
     @allure.description('При успешном создании пользователя код ответа 200, тело ответа содержит "success": true",'
-                        'email и name введенные при регистрации, а также непустые токены: accessToken и refreshToken')
+                        'email и name соответствуют при регистрации, а также непустые токены: accessToken и '
+                        'refreshToken')
     def test_create_user(self, payload_of_new_courier):
         create_courier = CreateUser()
 

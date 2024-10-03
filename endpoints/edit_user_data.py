@@ -5,7 +5,7 @@ from endpoints.base_endpoint import BaseEndpoint
 
 
 class EditUserData(BaseEndpoint):
-    EDIT_USER_DATA_ENDPOINT = '/api/auth/user'
+    EDIT_USER_DATA_ENDPOINT = 'api/auth/user'
 
     STATUS_CODE_OF_SUCCESSFUL_EDIT_USER_DATA = 200
 
@@ -16,7 +16,7 @@ class EditUserData(BaseEndpoint):
     def edit_user_data(self, payload, token=None):
         url = self.BASE_URL + self.EDIT_USER_DATA_ENDPOINT
         if token:
-            self.response = requests.patch(url, payload, headers={'Authorization': token})
+            self.response = requests.patch(url, json=payload, headers={'Authorization': token})
         else:
             self.response = requests.patch(url, payload)
         self.response_json = self.response.json()
